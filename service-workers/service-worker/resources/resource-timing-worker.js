@@ -6,4 +6,10 @@ self.addEventListener('fetch', function(event) {
       setTimeout(_ => resolve(new Response('// Empty javascript')), 50);
     }));
   }
+  else if (event.request.url.indexOf('import-scripts-redirect-worker.js') != -1) {
+    event.respondWith(fetch('import-scripts-redirect-import.js'));
+  }
+  else if (event.request.url.indexOf('missing.png') != -1) {
+    event.respondWith(fetch('dummy.txt'));
+  }
 });
