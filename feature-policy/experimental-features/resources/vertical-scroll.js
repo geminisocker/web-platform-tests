@@ -45,6 +45,10 @@ function rectToString(rect) {
   return `Location: (${rect.x}, ${rect.y}) Size: (${rect.width}, ${rect.height})`;
 }
 
+function setVerticalScrollPermission(frame, allow) {
+  frame.setAttribute("allow", `vertical-scroll ${allow ? "*" : "'none'"}`);
+}
+
 function onMessage(e) {
   if (window.messageResponseCallback) {
     window.messageResponseCallback(e.data);
