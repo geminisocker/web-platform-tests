@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<script src=/resources/testharness.js></script>
+<script src=/resources/testharnessreport.js></script>
+
+<!-- Same-origin script -->
+<script src="https://{{host}}:{{ports[https][0]}}/fetch/sec-metadata/resources/echo-as-script.py"></script>
+<script>
+  test(t => {
+    assert_equals(header, "cause=forced, destination=script, target=subresource, site=same-origin");
+    header = null;
+  }, "Same-origin script");
+</script>
+
+<!-- Same-site script -->
+<script src="https://{{hosts[][www]}}:{{ports[https][0]}}/fetch/sec-metadata/resources/echo-as-script.py"></script>
+<script>
+  test(t => {
+    assert_equals(header, "cause=forced, destination=script, target=subresource, site=same-site");
+    header = null;
+  }, "Same-site script");
+</script>
+
+<!-- Cross-site script -->
+<script src="https://{{hosts[alt][www]}}:{{ports[https][0]}}/fetch/sec-metadata/resources/echo-as-script.py"></script>
+<script>
+  test(t => {
+    assert_equals(header, "cause=forced, destination=script, target=subresource, site=cross-site");
+    header = null;
+  }, "Cross-site script");
+</script>
